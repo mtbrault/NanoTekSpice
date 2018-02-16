@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2018
-## bollinger
+## nanotekspice
 ## File description:
 ## makefile
 ##
@@ -9,18 +9,18 @@ CXX	=	g++
 
 RM	=	rm -f
 
-SRC	=	components/C4001.cpp
+SRC	=	src/components/C4001.cpp
 
 NAME	=	nanotekspice
 
-CXXFLAGS	=	-I./include -Wall -Wextra -Werror -lm
+CXXFLAGS	= -I./include -Wall -Wextra -Werror 
 
 OBJS	=	$(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CXX) $(OBJS) -o $(NAME) $(CFLAGS) $(CXXFLAGS)
+	 $(CXX) $(OBJS) -o $(NAME) $(CXXFLAGS)
 
 clean:
 	$(RM) $(OBJS)
