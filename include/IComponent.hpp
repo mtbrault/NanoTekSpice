@@ -1,0 +1,34 @@
+//
+// EPITECH PROJECT, 2018
+// tekspice
+// File description:
+// interface
+//
+
+#ifndef ICOMPONENT_HPP_
+# define ICOMPONENT_HPP_
+
+#include <iostream>
+
+namespace nts
+{
+	enum Tristate {
+		UNDEFINED = (-true),
+		TRUE = true,
+		FLASE = false
+	};
+
+	class IComponent
+	{
+	public:
+		virtual ~IComponent() = default;
+
+	public:
+		virtual nts::Tristate	compute(std::size_t = 1) = 0;
+		virtual void		setLink(std::size_t, nts::IComponent &,
+				     std::size_t) = 0;
+		virtual void		dump() const = 0;
+	};
+}
+
+#endif

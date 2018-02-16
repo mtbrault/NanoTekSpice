@@ -22,7 +22,7 @@ nts::Tristate	C4001::compute(std::size_t first)
 	return nts::Tristate::UNDEFINED;
 }
 
-void	C4001::setLink(std::size_t first, nts::IComponent &com, std::size_t second)
+void	C4001::setLink(std::size_t pin, nts::IComponent &com, std::size_t pin2)
 {
 	first = first;
 	com = com;
