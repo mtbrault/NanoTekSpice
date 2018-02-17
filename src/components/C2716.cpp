@@ -2,12 +2,12 @@
 // EPITECH PROJECT, 2018
 // tekspice
 // File description:
-// 4001 method
+// 2716 method
 //
 
-#include "C4001.hpp"
+#include "C2716.hpp"
 
-C4001::C4001(const std::string &value)
+C2716::C2716(const std::string &value)
 	: _maxPin(14)
 {
 	for (int i = 0; i < 14; i++) {
@@ -16,22 +16,22 @@ C4001::C4001(const std::string &value)
 	}
 }
 
-C4001::~C4001()
+C2716::~C2716()
 {
 }
 
-int	C4001::getMaxPin() const
+int	C2716::getMaxPin() const
 {
 	return _maxPin;
 }
 
-nts::Tristate	C4001::compute(std::size_t pin)
+nts::Tristate	C2716::compute(std::size_t pin)
 {
 	first = first;
 	return nts::Tristate::UNDEFINED;
 }
 
-void	C4001::setLink(std::size_t pin, nts::IComponent &other,
+void	C2716::setLink(std::size_t pin, nts::IComponent &other,
 		       std::size_t otherPin)
 {
 	if (_pin[pin] != NULL)
@@ -40,6 +40,6 @@ void	C4001::setLink(std::size_t pin, nts::IComponent &other,
 	
 }
 
-void	C4001::dump() const
+void	C2716::dump() const
 {
 }
