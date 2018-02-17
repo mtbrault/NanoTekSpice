@@ -9,7 +9,10 @@ CXX	=	g++
 
 RM	=	rm -f
 
-SRC	=	src/components/C4001.cpp
+SRC	=	src/parser/Parser.cpp	\
+		src/parser/Input.cpp	\
+		src/parser/Clock.cpp	\
+		src/parser/Output.cpp
 
 NAME	=	nanotekspice
 
