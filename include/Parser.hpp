@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <memory>
 
 #include "Input.hpp"
 #include "Output.hpp"
