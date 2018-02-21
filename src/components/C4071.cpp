@@ -2,44 +2,44 @@
 // EPITECH PROJECT, 2018
 // tekspice
 // File description:
-// 4001 method
+// 4071 method
 //
 
-#include "C4001.hpp"
+#include "C4071.hpp"
 
-C4001::C4001(const std::string &value)
+C4071::C4071(const std::string &value)
 	: _maxPin(14)
 {
+	(void) value;
 	for (int i = 0; i < 14; i++) {
 	        _pin.push_back(NULL);
 		_otherPin.push_back(0);
 	}
 }
 
-C4001::~C4001()
+C4071::~C4071()
 {
 }
 
-int	C4001::getMaxPin() const
+int	C4071::getMaxPin() const
 {
 	return _maxPin;
 }
 
-nts::Tristate	C4001::compute(std::size_t pin)
+nts::Tristate	C4071::compute(std::size_t pin)
 {
-	first = first;
+	(void) pin;
 	return nts::Tristate::UNDEFINED;
 }
 
-void	C4001::setLink(std::size_t pin, nts::IComponent &other,
+void	C4071::setLink(std::size_t pin, nts::IComponent &other,
 		       std::size_t otherPin)
 {
-	if (_pin[pin] != NULL)
-		throw std::overflow_error("2 links");
-	_pin[pin] = other;
-	
+	(void) pin;
+	(void) other;
+	(void) otherPin;
 }
 
-void	C4001::dump() const
+void	C4071::dump() const
 {
 }

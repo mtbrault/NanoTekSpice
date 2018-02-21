@@ -10,9 +10,29 @@
 
 #include <iostream>
 #include <memory>
-#include <map>
+#include <unordered_map>
 #include <functional>
 #include "IComponent.hpp"
+#include "C2716.hpp"
+#include "C4001.hpp"
+#include "C4008.hpp"
+#include "C4011.hpp"
+#include "C4013.hpp"
+#include "C4017.hpp"
+#include "C4030.hpp"
+#include "C4040.hpp"
+#include "C4069.hpp"
+#include "C4071.hpp"
+#include "C4081.hpp"
+#include "C4094.hpp"
+#include "C4514.hpp"
+#include "C4801.hpp"
+
+template<typename Type>
+std::unique_ptr<nts::IComponent>	newComp(const std::string &value)
+{
+	return (std::unique_ptr<Type>) new Type(value);
+}
 
 class	Factory
 {
@@ -24,12 +44,8 @@ public:
 							 const std::string &);
 	
 private:
-	template<typename Type>
-	std::unique_ptr<nts::IComponent> newComp(const std::string &value) const noexcept
-		{
-			return new Type(value);
-		}
-	std::map<const std::string, std::function>	_map;
+	using ptrFunc = std::function<std::unique_ptr<nts::IComponent>(const std::string &)>;
+	std::unordered_map<std::string, ptrFunc>	_map;
 };
 
 #endif

@@ -10,6 +10,7 @@
 C4001::C4001(const std::string &value)
 	: _maxPin(14)
 {
+	(void) value;
 	for (int i = 0; i < 14; i++) {
 	        _pin.push_back(NULL);
 		_otherPin.push_back(0);
@@ -27,16 +28,16 @@ int	C4001::getMaxPin() const
 
 nts::Tristate	C4001::compute(std::size_t pin)
 {
-	first = first;
+	(void) pin;
 	return nts::Tristate::UNDEFINED;
 }
 
 void	C4001::setLink(std::size_t pin, nts::IComponent &other,
 		       std::size_t otherPin)
 {
-	if (_pin[pin] != NULL)
-		throw std::overflow_error("2 links");
-	_pin[pin] = other;
+	(void) pin;
+	(void) other;
+	(void) otherPin;
 	
 }
 

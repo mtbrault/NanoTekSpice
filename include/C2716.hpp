@@ -10,7 +10,7 @@
 
 #include "IComponent.hpp"
 
-class C2716 : public IComponent
+class C2716 : public nts::IComponent
 {
 public:
 	C2716(std::string const &);
@@ -20,6 +20,12 @@ public:
 	void		setLink(std::size_t, nts::IComponent &,
 					std::size_t);
 	void		dump() const;
+	int		getMaxPin() const;
+	
+private:
+	int						_maxPin;
+	std::vector<std::unique_ptr<IComponent>>	_pin;
+	std::vector<size_t>				_otherPin;
 };
 
 #endif
