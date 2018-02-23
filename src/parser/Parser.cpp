@@ -64,8 +64,8 @@ void	Parser::parsing_manager()
 {
 	std::ifstream	File(_fname);
 	std::string	line;
-        bool	cpy_chipsets = false;
-	bool	cpy_links = false;
+        bool		cpy_chipsets = false;
+	bool		cpy_links = false;
 	std::vector<std::string> chipsets;
 	std::vector<std::string> links;
 

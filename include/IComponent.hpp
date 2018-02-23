@@ -17,7 +17,7 @@ namespace nts
 	enum Tristate {
 		UNDEFINED = (-true),
 		TRUE = true,
-		FLASE = false
+		FALSE = false
 	};
 
 	class IComponent

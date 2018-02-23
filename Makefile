@@ -10,9 +10,9 @@ CXX	=	g++
 RM	=	rm -f
 
 SRC	=	src/parser/Parser.cpp		\
-		src/parser/Input.cpp		\
+		src/components/Input.cpp		\
 		src/parser/Clock.cpp		\
-		src/parser/Output.cpp		\
+		src/componenets/Output.cpp		\
 		src/components/C2716.cpp	\
 		src/components/C4001.cpp	\
 		src/components/C4008.cpp	\
