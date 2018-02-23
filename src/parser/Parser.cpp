@@ -37,6 +37,7 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	std::string	type;
 	std::string	name;
         std::size_t	index = 0;
+	Factory	f;
 	
 	for (auto i = chipsets.begin(); i != chipsets.end(); ++i) {
 	        epur(*i);
@@ -48,8 +49,8 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 		} else if (type == "output") {
 			_output[name] = std::unique_ptr<Output>(new Output(name, 0));
 		} else {
-//			if ((_component[name] = f.createComponent(type, "")) == NULL)
-//				throw std::overflow_error("Bad component");
+			if ((_component[name] = f.createComponent(type, "")) == NULL)
+				throw std::overflow_error("Bad component");
 		}
 	}
 }
