@@ -16,7 +16,7 @@ public:
 	NanoError(const std::string &);
 	virtual ~NanoError() throw();
 
-	const char	*what() const noexcept override;
+	const char	*what() const noexcept;
 private:
 	std::string	_message;
 };
