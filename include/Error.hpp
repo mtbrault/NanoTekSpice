@@ -8,23 +8,17 @@
 #ifndef ERROR_HPP_
 # define ERROR_HPP_
 
-#include <iostream
+#include <iostream>
 
-class	NanoError : public std::exception {
+class	NanoError : std::exception
+{
 public:
-	NanoError(std::string const &message);
-	~NanoError() throw();
+	NanoError(const std::string &);
+	virtual ~NanoError() throw();
 
-	const char *what() const throw();
-	std::string _message;
-};
-
-class   InputError : public NanoError {
-public:
-	InputError(std::string const &message);
-	~InputError() throw();
-
-	std::string _message;
+	const char	*what() const noexcept override;
+private:
+	std::string	_message;
 };
 
 #endif	/* !ERROR_HPP_ */

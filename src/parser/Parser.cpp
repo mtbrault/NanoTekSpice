@@ -1,4 +1,3 @@
-
 //
 // EPITECH PROJECT, 2018
 // cpp_nanotekspice
@@ -7,6 +6,7 @@
 //
 
 #include <sstream>
+#include "Error.hpp"
 #include "Parser.hpp"
 
 Parser::Parser(const std::string &fname)
@@ -50,7 +50,7 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 			_output[name] = std::unique_ptr<Output>(new Output(name, 0));
 		} else {
 			if ((_component[name] = f.createComponent(type, "")) == NULL)
-				throw std::overflow_error("Bad component");
+				throw NanoError(name + "'s type is invalid\n");
 		}
 	}
 }
@@ -75,7 +75,7 @@ void	Parser::parsing_manager()
 	}
 	while (getline(File, line)) {
 		if ((line.at(0) != '#' and line != ".chipsets:" and line.at(0) != '\n' and line == ".links:") and cpy_chipsets != true)
-			throw std::overflow_error("syntax error" + line);
+			throw NanoError("Syntax error : " + line);
 		if (line == ".chipsets:")
 		        cpy_chipsets = true;
 		if (line == ".links:")
@@ -91,6 +91,7 @@ void	Parser::parsing_manager()
 void	nanotekspice(char **argv)
 {
 	Parser p(argv[1]);
+	
 	p.parsing_manager();
 }
 
@@ -100,7 +101,7 @@ int	main(int argc, char **argv)
 	if (argc == 2) {
 		try {
 			nanotekspice(argv);
-		} catch(std::exception &err) {
+		} catch(NanoError &err) {
 			std::cout << err.what() << std::endl;
 			return 84;
 		}

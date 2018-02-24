@@ -5,9 +5,9 @@
 // NanoError file
 //
 
-#include "NanoError.hpp"
+#include "Error.hpp"
 
-NanoError::NanoError(std::string const &message)
+NanoError::NanoError(const std::string &message)
 	: _message(message)
 {
 }
@@ -16,7 +16,7 @@ NanoError::~NanoError() throw()
 {
 }
 
-const char *NanoError::what() const throw()
+const char	*NanoError::what() const noexcept
 {
-	return this->_message.c_str();
+	return _message.c_str();
 }
