@@ -32,13 +32,58 @@ TekSpice::TekSpice(int ac, char **av)
 			throw NanoError("Input value must be 0 or 1");
 		_inputValue[name] = val;
 	}
+	_loopFunc["display"] = display;
+	_loopFunc["simulate"] = simulate;
+	_loopFunc["exit"] = exit;
+	_loopFunc["loop"] = loop;
+	_loopFunc["dump"] = dump;
 }
 
 TekSpice::~TekSpice()
 {
 }
 
+int	TekSpice::display()
+{
+	std::cout << "Je suis dans display" << std::endl;
+	return 0;
+}
+
+int	TekSpice::exit()
+{
+	std::cout << "Je suis dans exit" << std::endl;
+	return 1;
+}
+
+int	TekSpice::loop()
+{
+	std::cout << "Je suis dans loop" << std::endl;
+	return 0;
+}
+
+int	TekSpice::simulate()
+{
+	std::cout << "Je suis dans simulate" << std::endl;
+	return 0;
+}
+
+int	TekSpice::dump()
+{
+	std::cout << "Je suis dans dump" << std::endl;
+	return 0;
+}
+
 void	TekSpice::run()
 {
+	std::string	cmd;
 
+	std::cout << ">";
+	while (std::cin >> cmd) {
+		if (!_loopFunc[cmd])
+			std::cerr << "Command " << cmd << " is invalid" << std::endl;
+	        else
+			if (_loopFunc[cmd]() == 1)
+				break ;
+		std::cout << ">";
+	}
 }
