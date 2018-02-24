@@ -25,8 +25,10 @@ public:
 	void	parsing_manager();
 	void	parsing_chipsets(std::vector<std::string> chipsets);
 	void	parsing_links(std::vector<std::string> links);
+	void	set_MapArgs(std::map<const std::string, std::size_t> input_args);
 protected:
 	std::string _fname;
+	std::map<const std::string, std::size_t> _input_args;
 	std::map<const std::string, std::unique_ptr<Input>> _input;
 	std::map<const std::string, std::unique_ptr<Output>> _output;
 	std::map<const std::string, std::unique_ptr<nts::IComponent>> _component;

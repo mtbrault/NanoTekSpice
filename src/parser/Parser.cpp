@@ -8,6 +8,7 @@
 #include <sstream>
 #include "Error.hpp"
 #include "Parser.hpp"
+#include <stdio.h>
 
 Parser::Parser(const std::string &fname)
 	: _fname(fname)
@@ -16,6 +17,11 @@ Parser::Parser(const std::string &fname)
 
 Parser::~Parser()
 {
+}
+
+void	Parser::set_MapArgs(std::map<const std::string, std::size_t> input_args)
+{
+	_input_args = input_args;
 }
 
 void	epur(std::string &s)
@@ -38,7 +44,7 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	std::string	name;
         std::size_t	index = 0;
 	Factory		f;
-	
+
 	for (auto i = chipsets.begin(); i != chipsets.end(); ++i) {
 	        epur(*i);
 		index = (*i).find_first_of(' ');
@@ -55,11 +61,11 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	}
 }
 
-void	split_str(std::string part1, std::string &comp, std::string &pin)
+void	split_str(std::string part1, std::string &comp, std::string &pin, char c)
 {
 	std::size_t	index = 0;
 
-	index = part1.find_first_of(':');
+	index = part1.find_first_of(c);
 	if (index == std::string::npos)
 		throw NanoError("Bad links");
 	pin = part1.substr(index + 1);
@@ -81,12 +87,12 @@ void	Parser::parsing_links(std::vector<std::string> links)
 		index = (*i).find_first_of(' ');
 	        part1 = (*i).substr(index + 1);
 	        part2 = (*i).substr(0, index);
-		split_str(part1, comp, pin);
-		split_str(part2, comp2, pin2);
-		std::cout << "COMP PART1 : " << comp << std::endl;
-	        std::cout << "COMP PART2 : " << comp2 << std::endl;
-		std::cout << "PIN PART1 : " << pin << std::endl;
-	        std::cout << "PIN PART2 : " << comp2 << std::endl;
+		split_str(part1, comp, pin, ':');
+		split_str(part2, comp2, pin2, ':');
+		// std::cout << "COMP PART1 : " << comp << std::endl;
+	        // std::cout << "COMP PART2 : " << comp2 << std::endl;
+		// std::cout << "PIN PART1 : " << pin << std::endl;
+	        // std::cout << "PIN PART2 : " << comp2 << std::endl;
 	}
 	
 }
@@ -117,24 +123,4 @@ void	Parser::parsing_manager()
 	}
 	parsing_chipsets(chipsets);
 	parsing_links(links);
-}
-
-void	nanotekspice(char **argv)
-{
-	Parser p(argv[1]);
-	p.parsing_manager();
-}
-
-int	main(int argc, char **argv)
-{
-	(void) argc;
-	if (argc == 2) {
-		try {
-			nanotekspice(argv);
-		} catch(NanoError &err) {
-			std::cout << err.what() << std::endl;
-			return 84;
-		}
-		return 0;
-	}
 }
