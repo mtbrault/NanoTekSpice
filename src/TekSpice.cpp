@@ -10,7 +10,7 @@
 #include "Error.hpp"
 
 TekSpice::TekSpice(int ac, char **av)
-	: _filename(av[1]), _parser(Parser(_filename))
+	: _filename(av[1]), _parser(new Parser(_filename))
 {
 	std::string	name;
         int		val;

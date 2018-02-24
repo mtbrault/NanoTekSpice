@@ -12,7 +12,9 @@ RM	=	rm -f
 SRC	=	main.cpp		\
 		src/TekSpice.cpp	\
 		src/error/Error.cpp	\
-		src/Parser/Parser.cpp
+		src/parser/Parser.cpp	\
+		src/Factory/Factory.cpp	\
+		src/component/C4081.cpp
 
 NAME	=	nanotekspice
 

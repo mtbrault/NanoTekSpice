@@ -22,7 +22,7 @@ public:
 private:
 	std::string			_filename;
 	std::map<std::string, size_t>	_inputValue;
-	Parser				_parser;
+	std::unique_ptr<Parser>		_parser;
 };
 
 #endif

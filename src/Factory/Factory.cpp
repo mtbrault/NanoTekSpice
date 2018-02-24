@@ -10,7 +10,7 @@
 
 Factory::Factory()
 {
-	_map["2716"] = newComp<C2716>;
+/*	_map["2716"] = newComp<C2716>;
 	_map["4001"] = newComp<C4001>;
 	_map["4008"] = newComp<C4008>;
 	_map["4011"] = newComp<C4011>;
@@ -19,10 +19,10 @@ Factory::Factory()
 	_map["4030"] = newComp<C4030>;
 	_map["4040"] = newComp<C4040>;
 	_map["4069"] = newComp<C4069>;
-	_map["4071"] = newComp<C4071>;
+	_map["4071"] = newComp<C4071>;*/
 	_map["4081"] = newComp<C4081>;
-	_map["4094"] = newComp<C4094>;
-	_map["4514"] = newComp<C4514>;
+	/*_map["4094"] = newComp<C4094>;
+	_map["4514"] = newComp<C4514>;*/
 }
 
 Factory::~Factory()
