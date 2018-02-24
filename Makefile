@@ -12,11 +12,11 @@ RM	=	rm -f
 SRC	=	src/parser/Parser.cpp		\
 		src/components/Input.cpp		\
 		src/parser/Clock.cpp		\
-		src/componenets/Output.cpp		\
+		src/components/Output.cpp		\
 		src/components/C2716.cpp	\
-		src/components/C4001.cpp	\
 		src/components/C4008.cpp	\
 		src/components/C4011.cpp	\
+		src/components/C4001.cpp	\
 		src/components/C4013.cpp	\
 		src/components/C4017.cpp	\
 		src/components/C4030.cpp	\
@@ -27,7 +27,8 @@ SRC	=	src/parser/Parser.cpp		\
 		src/components/C4094.cpp	\
 		src/components/C4514.cpp	\
 		src/components/C4801.cpp	\
-		src/Factory/Factory.cpp
+		src/Factory/Factory.cpp		\
+		src/error/Error.cpp
 
 NAME	=	nanotekspice
 

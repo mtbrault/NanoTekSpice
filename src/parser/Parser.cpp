@@ -18,7 +18,7 @@ Parser::~Parser()
 {
 }
 
-void epur(std::string &s)
+void	epur(std::string &s)
 {
 	bool space = false;
 	auto p = s.begin();
@@ -37,7 +37,7 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	std::string	type;
 	std::string	name;
         std::size_t	index = 0;
-	Factory	f;
+	Factory		f;
 	
 	for (auto i = chipsets.begin(); i != chipsets.end(); ++i) {
 	        epur(*i);
@@ -45,9 +45,9 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	        name = (*i).substr(index + 1);
 	        type = (*i).substr(0, index);
 	        if (type == "input") {
-			_input[name] = std::unique_ptr<Input>(new Input(name, 0));
+			_input[name] = std::unique_ptr<Input>(new Input("0"));
 		} else if (type == "output") {
-			_output[name] = std::unique_ptr<Output>(new Output(name, 0));
+			_output[name] = std::unique_ptr<Output>(new Output("0"));
 		} else {
 			if ((_component[name] = f.createComponent(type, "")) == NULL)
 				throw NanoError(name + "'s type is invalid\n");
@@ -55,23 +55,53 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	}
 }
 
-void	Parser::parsing_links(std::vector<std::string> links)
+void	split_str(std::string part1, std::string &comp, std::string &pin)
 {
-	(void) links;
-	return ;
+	std::size_t	index = 0;
+
+	index = part1.find_first_of(':');
+	if (index == std::string::npos)
+		throw NanoError("Bad links");
+	pin = part1.substr(index + 1);
+        comp = part1.substr(0, index);
+}
+
+void	Parser::parsing_links(std::vector<std::string> links)
+{	
+	std::string     part1;
+	std::string     part2;
+	std::string	comp;
+	std::string	pin;
+	std::string	comp2;
+	std::string	pin2;
+	std::size_t	index = 0;
+
+	for (auto i = links.begin(); i != links.end(); ++i) {
+		epur(*i);
+		index = (*i).find_first_of(' ');
+	        part1 = (*i).substr(index + 1);
+	        part2 = (*i).substr(0, index);
+		split_str(part1, comp, pin);
+		split_str(part2, comp2, pin2);
+		std::cout << "COMP PART1 : " << comp << std::endl;
+	        std::cout << "COMP PART2 : " << comp2 << std::endl;
+		std::cout << "PIN PART1 : " << pin << std::endl;
+	        std::cout << "PIN PART2 : " << comp2 << std::endl;
+	}
+	
 }
 
 void	Parser::parsing_manager()
 {
 	std::ifstream	File(_fname);
 	std::string	line;
-        bool		cpy_chipsets = false;
-	bool		cpy_links = false;
+        bool	cpy_chipsets = false;
+	bool	cpy_links = false;
 	std::vector<std::string> chipsets;
 	std::vector<std::string> links;
 
 	if (!File.is_open()) {
-		throw std::overflow_error("File cannot be open");
+		throw NanoError("File cannot be open");
 	}
 	while (getline(File, line)) {
 		if ((line.at(0) != '#' and line != ".chipsets:" and line.at(0) != '\n' and line == ".links:") and cpy_chipsets != true)
@@ -86,12 +116,12 @@ void	Parser::parsing_manager()
 		        links.push_back(line);
 	}
 	parsing_chipsets(chipsets);
+	parsing_links(links);
 }
 
 void	nanotekspice(char **argv)
 {
 	Parser p(argv[1]);
-	
 	p.parsing_manager();
 }
 

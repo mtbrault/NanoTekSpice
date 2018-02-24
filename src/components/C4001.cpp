@@ -35,8 +35,9 @@ nts::Tristate	C4001::compute(std::size_t pin)
 void	C4001::setLink(std::size_t pin, nts::IComponent &other,
 		       std::size_t otherPin)
 {
-        _pin[pin] = other;
-	_otherPin[pin] = otherPin;
+        (void)pin;
+	(void)otherPin;
+	(void)other;
 }
 
 void	C4001::dump() const

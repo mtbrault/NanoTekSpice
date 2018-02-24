@@ -9,21 +9,33 @@
 #include <string>
 #include "Output.hpp"
 
-Output::Output(const std::string &name, bool state)
-	: _name(name), _state(state)
+Output::Output(const std::string &value)
 {
+	if (std::stoi(value) == 0)
+		_value = nts::Tristate::FALSE;
+	else if (std::stoi(value) == 1)
+		_value = nts::Tristate::TRUE;
+		
 }
 
 Output::~Output()
 {
 }
 
-std::string Output::getName() const
+nts::Tristate	Output::compute(size_t pin)
 {
-	return _name;
+	(void)pin;
+	return nts::Tristate::UNDEFINED;
 }
 
-bool	Output::getState() const
+void	Output::setLink(size_t pin, nts::IComponent &comp, size_t otherPin)
 {
-	return _state;
+	(void)pin;
+	(void)comp;
+	(void)otherPin;
+}
+
+void	Output::dump() const
+{
+
 }
