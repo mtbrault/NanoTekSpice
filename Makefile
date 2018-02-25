@@ -16,7 +16,10 @@ SRC	=	main.cpp			\
 		src/Factory/Factory.cpp		\
 		src/components/C4081.cpp	\
 		src/components/Output.cpp	\
-		src/components/Input.cpp
+		src/components/Input.cpp	\
+		src/components/Clock.cpp	\
+		src/components/True.cpp		\
+		src/components/False.cpp
 
 NAME	=	nanotekspice
 
