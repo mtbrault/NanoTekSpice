@@ -19,7 +19,7 @@ Parser::~Parser()
 {
 }
 
-/*std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getInput() const
+std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getInput() const
 {
 	return _input;
 }
@@ -48,7 +48,7 @@ std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getComponent() c
 {
 	return _component;
 }
-*/
+
 void	Parser::set_MapArgs(std::map<std::string, std::size_t> input_args)
 {
 	_input_args = input_args;

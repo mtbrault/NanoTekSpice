@@ -11,10 +11,8 @@
 
 False::False(const std::size_t value)
 {
-	if (std::stoi(value) == 0)
-		_value = nts::Tristate::FALSE;
-	else if (std::stoi(value) == 1)
-		_value = nts::Tristate::TRUE;		
+	(void) value;
+	_value = nts::Tristate::FALSE;
 }
 
 False::~False()

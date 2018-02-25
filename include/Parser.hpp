@@ -28,13 +28,13 @@ public:
 	void	parsing_chipsets(std::vector<std::string> chipsets);
 	void	parsing_links(std::vector<std::string> links);
 	void	set_MapArgs(std::map<std::string, std::size_t> input_args);
-/*	std::map<std::string, std::unique_ptr<nts::IComponent>>	getInput() const;
+	std::map<std::string, std::unique_ptr<nts::IComponent>>	getInput() const;
 	std::map<std::string, std::unique_ptr<nts::IComponent>>	getOutput() const;
 	std::map<std::string, std::unique_ptr<nts::IComponent>>	getClock() const;
 	std::map<std::string, std::unique_ptr<nts::IComponent>>	getTrue() const;
 	std::map<std::string, std::unique_ptr<nts::IComponent>>	getFalse() const;
 	std::map<std::string, std::unique_ptr<nts::IComponent>>	getComponent() const;
-*/
+
 protected:
 	std::string _fname;
 	std::map<std::string, std::size_t> _input_args;
