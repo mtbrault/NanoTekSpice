@@ -2,17 +2,17 @@
 // EPITECH PROJECT, 2018
 // cpp_nanotekspice
 // File description:
-// Clock header
+// False header
 //
 
 #include <iostream>
 #include "IComponent.hpp"
 
-class	Clock : public nts::IComponent
+class	False : public nts::IComponent
 {
 public:
-	Clock(const std::string &);
-        ~Clock();
+	False(const std::string &);
+        ~False();
 
 	nts::Tristate	compute(size_t = 1);
 	void		setLink(size_t, nts::IComponent &, size_t);

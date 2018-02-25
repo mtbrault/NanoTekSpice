@@ -19,6 +19,21 @@ Parser::~Parser()
 {
 }
 
+std::map<const std::string, std::unique_ptr<nts::IComponent>>	Parser::getComponentMap() const
+{
+	return _component;
+}
+
+std::map<const std::string, std::unique_ptr<Output>>	Parser::getOutputMap() const
+{
+	return _output;
+}
+
+std::map<const std::string, std::unique_ptr<Input>>	Parser::getInputMap() const
+{
+	return _input;
+}
+
 void	Parser::set_MapArgs(std::map<const std::string, std::size_t> input_args)
 {
 	_input_args = input_args;
@@ -54,6 +69,12 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 			_input[name] = std::unique_ptr<Input>(new Input("0"));
 		} else if (type == "output") {
 			_output[name] = std::unique_ptr<Output>(new Output("0"));
+		} else if (type == "clock") {
+			_clock[name] = std::unique_ptr<Clock>(new Clock("0"));
+		} else if (type == "true") {
+			_true[name] = std::unique_ptr<True>(new True("0"));
+		} else if (type == "false") {
+			_false[name] = std::unique_ptr<False>(new False("0"));
 		} else {
 			if ((_component[name] = f.createComponent(type, "")) == NULL)
 				throw NanoError(name + "'s type is invalid\n");
