@@ -66,15 +66,17 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	        name = (*i).substr(index + 1);
 	        type = (*i).substr(0, index);
 	        if (type == "input") {
-			_input[name] = std::unique_ptr<Input>(new Input("0"));
+			if (!_input_args[name])
+				throw NanoError("Input " + name + " is not initialized");
+			_input[name] = std::unique_ptr<Input>(new Input(_input_args[name]));
 		} else if (type == "output") {
-			_output[name] = std::unique_ptr<Output>(new Output("0"));
+			_output[name] = std::unique_ptr<Output>(new Output(0));
 		} else if (type == "clock") {
-			_clock[name] = std::unique_ptr<Clock>(new Clock("0"));
+			_clock[name] = std::unique_ptr<Clock>(new Clock(0));
 		} else if (type == "true") {
-			_true[name] = std::unique_ptr<True>(new True("0"));
+			_true[name] = std::unique_ptr<True>(new True(0));
 		} else if (type == "false") {
-			_false[name] = std::unique_ptr<False>(new False("0"));
+			_false[name] = std::unique_ptr<False>(new False(0));
 		} else {
 			if ((_component[name] = f.createComponent(type, "")) == NULL)
 				throw NanoError(name + "'s type is invalid\n");

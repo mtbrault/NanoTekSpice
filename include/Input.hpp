@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "IComponent.hpp"
-
+a
 class	Input : public nts::IComponent
 {
 public:
