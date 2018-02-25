@@ -20,7 +20,7 @@ SRC	=	main.cpp			\
 
 NAME	=	nanotekspice
 
-CXXFLAGS	= -I./include -Wall -Wextra -Werror 
+CXXFLAGS	= -I./include -Wall -Wextra -Werror
 
 OBJS	=	$(SRC:.cpp=.o)
 

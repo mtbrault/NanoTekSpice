@@ -7,11 +7,11 @@
 
 #include <iostream>
 #include "IComponent.hpp"
-a
+
 class	Input : public nts::IComponent
 {
 public:
-	Input(const std::string &);
+	Input(const std::size_t &);
         ~Input();
 
 	nts::Tristate	compute(size_t = 1);

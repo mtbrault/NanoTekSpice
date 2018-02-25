@@ -9,12 +9,10 @@
 #include <string>
 #include "Input.hpp"
 
-Input::Input(const std::string &value)
+Input::Input(const std::size_t &value)
+	: _maxPin(1)
 {
-	if (std::stoi(value) == 0)
-		_value = nts::Tristate::FALSE;
-	else if (std::stoi(value) == 1)
-		_value = nts::Tristate::TRUE;		
+        _value = (value == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
 }
 
 Input::~Input()

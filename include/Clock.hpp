@@ -11,7 +11,7 @@
 class	Clock : public nts::IComponent
 {
 public:
-	Clock(const std::string &);
+	Clock(const std::size_t);
         ~Clock();
 
 	nts::Tristate	compute(size_t = 1);

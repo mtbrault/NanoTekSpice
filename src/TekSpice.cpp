@@ -83,6 +83,7 @@ void	TekSpice::run()
 {
 	std::string	cmd;
 
+	_parser->set_MapArgs(_inputValue);
 	try {
 		_parser->parsing_manager();
 	} catch (const NanoError error) {
