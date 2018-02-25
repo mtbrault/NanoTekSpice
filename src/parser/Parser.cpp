@@ -57,6 +57,9 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 		}
 		if ((_component[name] = f.createComponent(type, _input_args[name])) == NULL)
 			throw NanoError(type + "is an invalid type");
+		if (type != "input" && type != "clock" &&
+		    type != "true" && type != "false" && type != "output")
+			_compname = type;
 	}
 }
 
@@ -88,10 +91,15 @@ void	Parser::parsing_links(std::vector<std::string> links)
 	        part2 = (*i).substr(0, index);
 		split_str(part1, comp, pin, ':');
 		split_str(part2, comp2, pin2, ':');
-		// std::cout << "COMP PART1 : " << comp << std::endl;
-	        // std::cout << "COMP PART2 : " << comp2 << std::endl;
-		// std::cout << "PIN PART1 : " << pin << std::endl;
-	        // std::cout << "PIN PART2 : " << comp2 << std::endl;
+		// if (std::stoi(pin2) > _component[comp2]->getMaxPin())
+		// 	throw NanoError("Pin is to high");
+		// if (std::stoi(pin) > _component[comp]->getMaxPin())
+		// 	throw NanoError("Pin is to high");
+		if (_component.find(comp2) == _component.end())
+			throw NanoError("Component " + comp2 + " is not initialized");
+		if (_component.find(comp) == _component.end())
+			throw NanoError("Component " + comp + " is not initialized");
+		_component[comp2]->setLink((size_t) std::stoi(pin2), *_component[comp],(size_t) std::stoi(pin));
 	}
 	
 }
