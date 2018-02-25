@@ -11,7 +11,7 @@
 class	False : public nts::IComponent
 {
 public:
-	False(const std::size_t);
+	False(const std::string &);
         ~False();
 
 	nts::Tristate	compute(size_t = 1);

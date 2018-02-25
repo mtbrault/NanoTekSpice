@@ -83,17 +83,17 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 	        if (type == "input") {
 			if (!_input_args[name])
 				throw NanoError("Input " + name + " is not initialized");
-			_input[name] = std::unique_ptr<nts::IComponent>(new Input(_input_args[name]));
+			_input[name] = std::unique_ptr<Input>(new Input(_input_args[name]));
 		} else if (type == "output") {
-			_output[name] = std::unique_ptr<nts::IComponent>(new Output(0));
+			_output[name] = std::unique_ptr<Output>(new Output(0));
 		} else if (type == "clock") {
 			if (!_input_args[name])
 				throw NanoError("Clock " + name + " is not initialized");
-			_clock[name] = std::unique_ptr<nts::IComponent>(new Clock(_input_args[name]));
+			_clock[name] = std::unique_ptr<Clock>(new Clock(_input_args[name]));
 		} else if (type == "true") {
-			_true[name] = std::unique_ptr<nts::IComponent>(new True(0));
+			_true[name] = std::unique_ptr<True>(new True(0));
 		} else if (type == "false") {
-			_false[name] = std::unique_ptr<nts::IComponent>(new False(0));
+			_false[name] = std::unique_ptr<False>(new False(0));
 		} else {
 			if ((_component[name] = f.createComponent(type, "")) == NULL)
 				throw NanoError(name + "'s type is invalid\n");

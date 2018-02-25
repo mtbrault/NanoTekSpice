@@ -9,7 +9,7 @@
 #include <string>
 #include "Output.hpp"
 
-Output::Output(const std::size_t value)
+Output::Output(const std::string &value)
 {
 	(void)value;
 }

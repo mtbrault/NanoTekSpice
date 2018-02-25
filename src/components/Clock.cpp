@@ -9,7 +9,7 @@
 #include <string>
 #include "Clock.hpp"
 
-Clock::Clock(const std::size_t value)
+Clock::Clock(const std::string &value)
 {
 	_value = (value == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
 }

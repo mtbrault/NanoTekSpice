@@ -11,7 +11,7 @@
 class	True : public nts::IComponent
 {
 public:
-	True(const std::size_t);
+	True(const std::string &);
         ~True();
 
 	nts::Tristate	compute(size_t = 1);

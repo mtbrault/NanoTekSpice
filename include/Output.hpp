@@ -11,7 +11,7 @@
 class	Output : public nts::IComponent
 {
 public:
-	Output(const std::size_t);
+	Output(const std::string &);
         ~Output();
 
 	nts::Tristate	compute(size_t = 1);

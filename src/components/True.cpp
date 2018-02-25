@@ -9,7 +9,7 @@
 #include <string>
 #include "True.hpp"
 
-True::True(const std::size_t value)
+True::True(const std::string &value)
 {
 	(void)value;
 	_value = nts::Tristate::TRUE;

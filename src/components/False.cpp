@@ -9,7 +9,7 @@
 #include <string>
 #include "False.hpp"
 
-False::False(const std::size_t value)
+False::False(const std::string &value)
 {
 	(void) value;
 	_value = nts::Tristate::FALSE;
