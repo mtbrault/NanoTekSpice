@@ -16,17 +16,17 @@
 
 class	Parser {
 public:
-	Parser(const std::string &fname);
+	using	compMap = std::map<std::string, std::unique_ptr<nts::IComponent>> &;
+	Parser(const std::string &fname, compMap);
 	virtual ~Parser();
 
 	void	parsing_manager();
 	void	parsing_chipsets(std::vector<std::string> chipsets);
 	void	parsing_links(std::vector<std::string> links);
 	void	set_MapArgs(std::map<std::string, std::string> input_args);
-	//std::map<std::string, std::unique_ptr<nts::IComponent>>	getComponent() const;
 
 protected:
 	std::string _fname;
 	std::map<std::string, std::string> _input_args;
-	std::map<std::string, std::unique_ptr<nts::IComponent>> _component;
+        compMap	_component;
 };

@@ -30,7 +30,8 @@ public:
 	static int	dump();
 private:
 	std::string						_filename;
-	std::map<std::string, std::string>				_inputValue;
+	std::map<std::string, std::string>			_inputValue;
+	std::map<std::string, std::unique_ptr<nts::IComponent>>	_component;
 	std::unique_ptr<Parser>					_parser;
 	std::unordered_map<std::string, std::function<int()>>	_loopFunc;
 };

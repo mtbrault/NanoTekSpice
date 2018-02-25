@@ -10,19 +10,14 @@
 #include "Error.hpp"
 #include "Parser.hpp"
 
-Parser::Parser(const std::string &fname)
-	: _fname(fname)
+Parser::Parser(const std::string &fname, std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
+	: _fname(fname), _component(map)
 {
 }
 
 Parser::~Parser()
 {
 }
-
-/*std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getComponent() const
-{
-	return _component;
-	}*/
 
 void	Parser::set_MapArgs(std::map<std::string, std::string> input_args)
 {
@@ -60,7 +55,7 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 			if (_input_args.find(name) == _input_args.end())
 				throw NanoError("Component " + name + " is not initialized");
 		}
-		if ((_component[name] = f.createComponent(type, "")) == NULL)
+		if ((_component[name] = f.createComponent(type, _input_args[name])) == NULL)
 			throw NanoError(type + "is an invalid type");
 	}
 }
@@ -114,16 +109,18 @@ void	Parser::parsing_manager()
 		throw NanoError("File cannot be open");
 	}
 	while (getline(File, line)) {
-		if ((line.at(0) != '#' and line != ".chipsets:" and line.at(0) != '\n' and line == ".links:") and cpy_chipsets != true)
-			throw NanoError("Syntax error : " + line);
-		if (line == ".chipsets:")
-		        cpy_chipsets = true;
-		if (line == ".links:")
-		        cpy_links = true;
-		if (cpy_chipsets == true && cpy_links == false && line != ".chipsets:" && line != ".links:")
-			chipsets.push_back(line);
-		if (cpy_chipsets == true && cpy_links == true && line != ".chipsets:" && line != ".links:")
-		        links.push_back(line);
+		if (line.length() != 0) {
+			if ((line.at(0) != '#' and line != ".chipsets:" and line.at(0) != '\n' and line == ".links:") and cpy_chipsets != true)
+				throw NanoError("Syntax error : " + line);
+			if (line == ".chipsets:")
+				cpy_chipsets = true;
+			if (line == ".links:")
+				cpy_links = true;
+			if (cpy_chipsets == true && cpy_links == false && line != ".chipsets:" && line != ".links:")
+				chipsets.push_back(line);
+			if (cpy_chipsets == true && cpy_links == true && line != ".chipsets:" && line != ".links:")
+				links.push_back(line);
+		}
 	}
 	parsing_chipsets(chipsets);
 	parsing_links(links);
