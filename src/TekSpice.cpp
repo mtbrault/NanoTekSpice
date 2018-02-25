@@ -43,6 +43,12 @@ TekSpice::~TekSpice()
 {
 }
 
+int	TekSpice::changeValue(const std::string cmd)
+{
+	(void)cmd;
+	return -1;
+}
+
 int	TekSpice::display()
 {
 	std::cout << "Je suis dans display" << std::endl;
@@ -77,10 +83,17 @@ void	TekSpice::run()
 {
 	std::string	cmd;
 
+	try {
+		_parser->parsing_manager();
+	} catch (const NanoError error) {
+		throw error;
+	}
 	std::cout << ">";
 	while (std::cin >> cmd) {
-		if (!_loopFunc[cmd])
-			std::cerr << "Command " << cmd << " is invalid" << std::endl;
+		if (!_loopFunc[cmd]) {
+			if (changeValue(cmd) == -1)
+				std::cerr << "Command \"" << cmd << "\" is invalid" << std::endl;
+		}
 	        else
 			if (_loopFunc[cmd]() == 1)
 				break ;

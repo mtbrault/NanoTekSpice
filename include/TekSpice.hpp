@@ -21,7 +21,8 @@ public:
 	TekSpice(int, char **);
 	~TekSpice();
 
-	void	run();
+	void		run();
+	int		changeValue(const std::string);
 	static int	display();
 	static int	simulate();
 	static int	exit();
