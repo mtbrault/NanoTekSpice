@@ -19,37 +19,12 @@ Parser::~Parser()
 {
 }
 
-std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getInput() const
-{
-	return _input;
-}
-
-std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getOutput() const
-{
-	return _output;
-}
-
-std::map<std::string, std::unique_ptr<nts::IComponent>> Parser::getClock() const
-{
-	return _clock;
-}
-
-std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getTrue() const
-{
-	return _true;
-}
-
-std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getFalse() const
-{
-	return _false;
-}
-
-std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getComponent() const
+/*std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getComponent() const
 {
 	return _component;
-}
+	}*/
 
-void	Parser::set_MapArgs(std::map<std::string, std::size_t> input_args)
+void	Parser::set_MapArgs(std::map<std::string, std::string> input_args)
 {
 	_input_args = input_args;
 }
@@ -57,6 +32,7 @@ void	Parser::set_MapArgs(std::map<std::string, std::size_t> input_args)
 void	epur(std::string &s)
 {
 	bool space = false;
+
 	auto p = s.begin();
 	for (auto ch : s)
 		if (std::isspace(ch)) {
@@ -80,24 +56,12 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 		index = (*i).find_first_of(' ');
 	        name = (*i).substr(index + 1);
 	        type = (*i).substr(0, index);
-	        if (type == "input") {
-			if (!_input_args[name])
-				throw NanoError("Input " + name + " is not initialized");
-			_input[name] = std::unique_ptr<Input>(new Input(_input_args[name]));
-		} else if (type == "output") {
-			_output[name] = std::unique_ptr<Output>(new Output(0));
-		} else if (type == "clock") {
-			if (!_input_args[name])
-				throw NanoError("Clock " + name + " is not initialized");
-			_clock[name] = std::unique_ptr<Clock>(new Clock(_input_args[name]));
-		} else if (type == "true") {
-			_true[name] = std::unique_ptr<True>(new True(0));
-		} else if (type == "false") {
-			_false[name] = std::unique_ptr<False>(new False(0));
-		} else {
-			if ((_component[name] = f.createComponent(type, "")) == NULL)
-				throw NanoError(name + "'s type is invalid\n");
+		if (type == "input" || type == "clock") {
+			if (_input_args.find(name) == _input_args.end())
+				throw NanoError("Component " + name + " is not initialized");
 		}
+		if ((_component[name] = f.createComponent(type, "")) == NULL)
+			throw NanoError(type + "is an invalid type");
 	}
 }
 

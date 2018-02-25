@@ -12,7 +12,7 @@
 Input::Input(const std::string &value)
 	: _maxPin(1)
 {
-        _value = (value == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
+        _value = (std::stoi(value) == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
 }
 
 Input::~Input()

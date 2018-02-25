@@ -23,6 +23,11 @@ Factory::Factory()
 	_map["4081"] = newComp<C4081>;
 	/*_map["4094"] = newComp<C4094>;
 	_map["4514"] = newComp<C4514>;*/
+	_map["input"] = newComp<Input>;
+	_map["output"] = newComp<Output>;
+	_map["true"] = newComp<True>;
+	_map["false"] = newComp<False>;
+	_map["clock"] = newComp<Clock>;
 }
 
 Factory::~Factory()

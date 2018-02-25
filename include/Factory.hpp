@@ -27,6 +27,11 @@
 #include "C4094.hpp"
 #include "C4514.hpp"
 #include "C4801.hpp"
+#include "Input.hpp"
+#include "Output.hpp"
+#include "True.hpp"
+#include "False.hpp"
+#include "Clock.hpp"
 
 template<typename Type>
 std::unique_ptr<nts::IComponent>	newComp(const std::string &value)

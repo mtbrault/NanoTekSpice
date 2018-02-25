@@ -11,7 +11,7 @@
 
 Clock::Clock(const std::string &value)
 {
-	_value = (value == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
+	_value = (std::stoi(value) == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
 }
 
 Clock::~Clock()
