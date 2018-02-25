@@ -19,20 +19,36 @@ Parser::~Parser()
 {
 }
 
-
-std::map<std::string, std::map<std::string, std::unique_ptr<nts::IComponent>>>	Parser::getMap() const
+/*std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getInput() const
 {
-	std::map<std::string, std::map<std::string, std::unique_ptr<nts::IComponent>>>	compMap;
-
-	compMap["input"] = _input;
-	compMap["output"] = _output;
-	compMap["clock"] = _clock;
-	compMap["true"] = _true;
-	compMap["false"] = _false;
-	compMap["component"] = _component;
-	return compMap;
+	return _input;
 }
 
+std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getOutput() const
+{
+	return _output;
+}
+
+std::map<std::string, std::unique_ptr<nts::IComponent>> Parser::getClock() const
+{
+	return _clock;
+}
+
+std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getTrue() const
+{
+	return _true;
+}
+
+std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getFalse() const
+{
+	return _false;
+}
+
+std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::getComponent() const
+{
+	return _component;
+}
+*/
 void	Parser::set_MapArgs(std::map<std::string, std::size_t> input_args)
 {
 	_input_args = input_args;

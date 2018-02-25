@@ -11,7 +11,7 @@
 class	Input : public nts::IComponent
 {
 public:
-	Input(const std::size_t &);
+	Input(const std::size_t);
         ~Input();
 
 	nts::Tristate	compute(size_t = 1);

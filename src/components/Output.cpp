@@ -9,13 +9,9 @@
 #include <string>
 #include "Output.hpp"
 
-Output::Output(const std::string &value)
+Output::Output(const std::size_t value)
 {
-	if (std::stoi(value) == 0)
-		_value = nts::Tristate::FALSE;
-	else if (std::stoi(value) == 1)
-		_value = nts::Tristate::TRUE;
-		
+	(void)value;
 }
 
 Output::~Output()

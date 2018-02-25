@@ -9,7 +9,7 @@
 #include <string>
 #include "True.hpp"
 
-True::True(const std::string &value)
+True::True(const std::size_t value)
 {
 	if (std::stoi(value) == 0)
 		_value = nts::Tristate::FALSE;
