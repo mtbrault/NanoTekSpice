@@ -42,7 +42,7 @@ void	True::setValue(const size_t value)
 
 void	True::dump() const
 {
-
+	std::cout << "  " << getType() << " - Value: " << _value << std::endl;
 }
 
 size_t	True::getMaxPin() const

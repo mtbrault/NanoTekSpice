@@ -129,7 +129,7 @@ void	TekSpice::run()
 	}
 	simulate(_component);
 	display(_component);
-	std::cout << ">";
+	std::cout << "> ";
 	while (std::cin >> cmd) {
 		if (!_loopFunc[cmd]) {
 			if (changeValue(cmd) == -1)
@@ -138,6 +138,6 @@ void	TekSpice::run()
 	        else
 			if (_loopFunc[cmd](_component) == 1)
 				break ;
-		std::cout << ">";
+		std::cout << "> ";
 	}
 }

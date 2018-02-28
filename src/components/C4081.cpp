@@ -80,4 +80,12 @@ void	C4081::setLink(std::size_t pin, nts::IComponent &comp,
 
 void	C4081::dump() const
 {
+	std::cout << "  " << getType() << " value:" << std::endl;
+	for (int i = 0; i < 14; i++) {
+		std::cout << "\tPin " << (i + 1) << ": ";
+		if (_pin[i])
+			std::cout << _pin[i]->compute(_otherPin[i]) << std::endl;
+		else
+			std::cout << "U" << std::endl;
+	}
 }

@@ -41,6 +41,7 @@ void	Input::setValue(const size_t value)
 
 void	Input::dump() const
 {
+	std::cout << "  " << getType() << " - Value: " << _value << std::endl;
 }
 
 size_t	Input::getMaxPin() const

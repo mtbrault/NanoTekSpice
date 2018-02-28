@@ -47,6 +47,7 @@ std::string	Output::getType() const
 
 void	Output::dump() const
 {
+	std::cout << "  " << getType() << " - Output: " << _value << std::endl;
 }
 
 void	Output::setValue(const size_t value)

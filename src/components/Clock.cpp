@@ -36,6 +36,7 @@ void	Clock::setLink(size_t pin, nts::IComponent &comp, size_t otherPin)
 
 void	Clock::dump() const
 {
+	std::cout << "  " << getType() << " - Value " << _value << std::endl;
 }
 
 size_t	Clock::getMaxPin() const

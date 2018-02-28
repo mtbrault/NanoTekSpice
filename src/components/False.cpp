@@ -42,7 +42,7 @@ void	False::setLink(size_t pin, nts::IComponent &comp, size_t otherPin)
 
 void	False::dump() const
 {
-
+	std::cout << "  " << getType() << " - Value: " << _value << std::endl;
 }
 
 size_t	False::getMaxPin() const
