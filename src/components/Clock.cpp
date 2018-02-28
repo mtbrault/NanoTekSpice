@@ -10,6 +10,7 @@
 #include "Clock.hpp"
 
 Clock::Clock(const std::string &value)
+	: _maxPin(1), _component(nullptr), _type("clock")
 {
 	_value = (std::stoi(value) == 0) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
 }
@@ -21,17 +22,41 @@ Clock::~Clock()
 nts::Tristate	Clock::compute(size_t pin)
 {
 	(void)pin;
-	return nts::Tristate::UNDEFINED;
+	return _value;
 }
 
 void	Clock::setLink(size_t pin, nts::IComponent &comp, size_t otherPin)
 {
-	(void)pin;
-	(void)comp;
-	(void)otherPin;
+	if (_component == nullptr) {
+		_component = &comp;
+		_otherPin = otherPin;
+		comp.setLink(otherPin, *this, pin);
+	}
 }
 
 void	Clock::dump() const
 {
+}
 
+size_t	Clock::getMaxPin() const
+{
+	return _maxPin;
+}
+
+void	Clock::setValue(const size_t value)
+{
+	(void) value;
+	std::cout << "value était " << _value << std::endl;
+	_value = (_value == nts::Tristate::TRUE) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
+	std::cout << "maintenant " << _value << std::endl;
+}
+
+std::string	Clock::getType() const
+{
+	return _type;
+}
+
+nts::Tristate	Clock::getValue() const
+{
+	return _value;
 }

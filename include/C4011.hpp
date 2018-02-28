@@ -20,7 +20,7 @@ public:
 	void		setLink(std::size_t, nts::IComponent &,
 					std::size_t);
 	void		dump() const;
-	int		getMaxPin() const;
+	size_t		getMaxPin() const;
 	
 private:
 	int						_maxPin;

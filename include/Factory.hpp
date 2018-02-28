@@ -36,7 +36,7 @@
 template<typename Type>
 std::unique_ptr<nts::IComponent>	newComp(const std::string &value)
 {
-	return (std::unique_ptr<Type>) new Type(value);
+	return std::make_unique<Type>(value);
 }
 
 class	Factory

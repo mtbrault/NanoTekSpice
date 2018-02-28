@@ -91,15 +91,23 @@ void	Parser::parsing_links(std::vector<std::string> links)
 	        part2 = (*i).substr(0, index);
 		split_str(part1, comp, pin, ':');
 		split_str(part2, comp2, pin2, ':');
-		// if (std::stoi(pin2) > _component[comp2]->getMaxPin())
-		// 	throw NanoError("Pin is to high");
-		// if (std::stoi(pin) > _component[comp]->getMaxPin())
-		// 	throw NanoError("Pin is to high");
+		try {
+			if ((size_t)std::stoi(pin2) > _component[comp2]->getMaxPin())
+				throw NanoError("Pin is to high");
+			if ((size_t)std::stoi(pin) > _component[comp]->getMaxPin())
+				throw NanoError("Pin is to high");
+		} catch (std::exception &ex) {
+			throw NanoError("Pin is invalid");
+		}
 		if (_component.find(comp2) == _component.end())
 			throw NanoError("Component " + comp2 + " is not initialized");
 		if (_component.find(comp) == _component.end())
 			throw NanoError("Component " + comp + " is not initialized");
-		_component[comp2]->setLink((size_t) std::stoi(pin2), *_component[comp],(size_t) std::stoi(pin));
+		try {
+			_component[comp2]->setLink((size_t) std::stoi(pin2), *_component[comp],(size_t) std::stoi(pin));
+		} catch (const NanoError exception) {
+			throw exception;
+		}
 	}
 	
 }

@@ -21,19 +21,20 @@ public:
 	TekSpice(int, char **);
 	~TekSpice();
 
+	using	compMap = std::map<std::string, std::unique_ptr<nts::IComponent>>;
 	void		run();
 	int		changeValue(const std::string);
-	static int	display();
-	static int	simulate();
-	static int	exit();
-	static int	loop();
-	static int	dump();
+	static int	display(compMap &);
+	static int	simulate(compMap &);
+	static int	exit(compMap &);
+	static int	loop(compMap &);
+	static int	dump(compMap &);
 private:
-	std::string						_filename;
-	std::map<std::string, std::string>			_inputValue;
-	std::map<std::string, std::unique_ptr<nts::IComponent>>	_component;
-	std::unique_ptr<Parser>					_parser;
-	std::unordered_map<std::string, std::function<int()>>	_loopFunc;
+	std::string							_filename;
+	std::map<std::string, std::string>				_inputValue;
+        compMap								_component;
+	std::unique_ptr<Parser>						_parser;
+	std::unordered_map<std::string, std::function<int(compMap &)>>	_loopFunc;
 };
 
 #endif

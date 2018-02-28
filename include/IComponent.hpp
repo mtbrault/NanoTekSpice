@@ -30,6 +30,9 @@ namespace nts
 		virtual void		setLink(std::size_t, nts::IComponent &,
 				     std::size_t) = 0;
 		virtual void		dump() const = 0;
+		virtual std::string	getType() const = 0;
+		virtual size_t		getMaxPin() const = 0;
+		virtual void		setValue(size_t value) = 0;
 	};
 }
 

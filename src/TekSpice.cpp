@@ -6,11 +6,12 @@
 //
 
 #include <string>
+#include <signal.h>
 #include "TekSpice.hpp"
 #include "Error.hpp"
 
 TekSpice::TekSpice(int ac, char **av)
-	: _filename(av[1]), _parser(new Parser(_filename, _component))
+	: _filename(av[1]), _parser(std::make_unique<Parser>(_filename, _component))
 {
 	std::string	name;
 	std::string	val;
@@ -45,50 +46,89 @@ TekSpice::~TekSpice()
 
 int	TekSpice::changeValue(const std::string cmd)
 {
-	(void)cmd;
-	return -1;
-}
+        size_t		index = 0;
+	std::string	comp;
+	std::string	value;
 
-int	TekSpice::display()
-{
-	std::cout << "Je suis dans display" << std::endl;
+	index = cmd.find_first_of("=");
+	if (index == std::string::npos)
+		return -1;
+	comp = cmd.substr(0, index);
+	value = cmd.substr(index + 1);
+	if (!_component[comp] || _component[comp]->getType() == "output")
+		return -1;
+	try {
+		if (std::stoi(value) < 0 || std::stoi(value) > 1)
+			return -1;
+	        _component[comp]->setValue(std::stoi(value));
+	} catch (const std::exception error) {
+		return -1;
+	}
 	return 0;
 }
 
-int	TekSpice::exit()
+int	TekSpice::display(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
 {
-	std::cout << "Je suis dans exit" << std::endl;
+        for (auto i = map.begin(); i != map.end(); i++) {
+		if (i->second->getType() == "output") {
+			std::cout << i->first << "=";
+			if (i->second->compute() == nts::Tristate::UNDEFINED)
+				std::cout << "U" << std::endl;
+			else
+				std::cout << i->second->compute() << std::endl;
+		}
+	}
+	return 0;
+}
+
+int	TekSpice::exit(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
+{
+        (void) map;
 	return 1;
 }
 
-int	TekSpice::loop()
+int	TekSpice::loop(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
 {
-	std::cout << "Je suis dans loop" << std::endl;
+	while (42) {
+		simulate(map);
+	}
 	return 0;
 }
 
-int	TekSpice::simulate()
+int	TekSpice::simulate(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
 {
-	std::cout << "Je suis dans simulate" << std::endl;
+	for (auto i = map.begin(); i != map.end(); i++) {
+		if (i->second->getType() == "output")
+			i->second->setValue(0);
+	}
+	for (auto i = map.begin(); i != map.end(); i++) {
+		if (i->second->getType() == "clock")
+			i->second->setValue(nts::Tristate::UNDEFINED);
+	}
 	return 0;
 }
 
-int	TekSpice::dump()
+int	TekSpice::dump(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
 {
-	std::cout << "Je suis dans dump" << std::endl;
+	for (auto i = map.begin(); i != map.end(); i++) {
+		std::cout << i->first << ":" << std::endl;
+		i->second->dump();
+	}
 	return 0;
 }
 
 void	TekSpice::run()
 {
 	std::string	cmd;
-	
+
 	_parser->set_MapArgs(_inputValue);
 	try {
 		_parser->parsing_manager();
 	} catch (const NanoError error) {
 		throw error;
 	}
+	simulate(_component);
+	display(_component);
 	std::cout << ">";
 	while (std::cin >> cmd) {
 		if (!_loopFunc[cmd]) {
@@ -96,7 +136,7 @@ void	TekSpice::run()
 				std::cerr << "Command \"" << cmd << "\" is invalid" << std::endl;
 		}
 	        else
-			if (_loopFunc[cmd]() == 1)
+			if (_loopFunc[cmd](_component) == 1)
 				break ;
 		std::cout << ">";
 	}

@@ -8,7 +8,7 @@
 #include "C4801.hpp"
 
 C4801::C4801(const std::string &value)
-	: _maxPin(14)
+	: _maxPin(14), _type("C4801")
 {
 	(void) value;
 	for (int i = 0; i < 14; i++) {
@@ -19,6 +19,16 @@ C4801::C4801(const std::string &value)
 
 C4801::~C4801()
 {
+}
+
+std::string	getType() const
+{
+	return _type;
+}
+
+nts::Tristate	getValue() const
+{
+	return _value;
 }
 
 int	C4801::getMaxPin() const

@@ -10,9 +10,9 @@
 #include "False.hpp"
 
 False::False(const std::string &value)
+	: _maxPin(1), _component(nullptr), _value(nts::Tristate::FALSE), _type("false")
 {
 	(void) value;
-	_value = nts::Tristate::FALSE;
 }
 
 False::~False()
@@ -22,17 +22,35 @@ False::~False()
 nts::Tristate	False::compute(size_t pin)
 {
 	(void)pin;
-	return nts::Tristate::UNDEFINED;
+	return _value;
+}
+
+void	False::setValue(const size_t value)
+{
+	(void) value;
+	std::cout << "False's value can't be change" << std::endl;
 }
 
 void	False::setLink(size_t pin, nts::IComponent &comp, size_t otherPin)
 {
-	(void)pin;
-	(void)comp;
-	(void)otherPin;
+	if (_component == nullptr) {
+		_component = &comp;
+		_otherPin = otherPin;
+		comp.setLink(otherPin, *this, pin);
+	}
 }
 
 void	False::dump() const
 {
 
+}
+
+size_t	False::getMaxPin() const
+{
+	return _maxPin;
+}
+
+std::string	False::getType() const
+{
+	return _type;
 }
