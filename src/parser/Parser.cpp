@@ -51,15 +51,14 @@ void	Parser::parsing_chipsets(std::vector<std::string> chipsets)
 		index = (*i).find_first_of(' ');
 	        name = (*i).substr(index + 1);
 	        type = (*i).substr(0, index);
+		if (_component[name])
+			throw NanoError(name + ": 2 components share this name");
 		if (type == "input" || type == "clock") {
 			if (_input_args.find(name) == _input_args.end())
 				throw NanoError("Component " + name + " is not initialized");
 		}
 		if ((_component[name] = f.createComponent(type, _input_args[name])) == NULL)
 			throw NanoError(type + "is an invalid type");
-		if (type != "input" && type != "clock" &&
-		    type != "true" && type != "false" && type != "output")
-			_compname = type;
 	}
 }
 
@@ -91,6 +90,10 @@ void	Parser::parsing_links(std::vector<std::string> links)
 	        part2 = (*i).substr(0, index);
 		split_str(part1, comp, pin, ':');
 		split_str(part2, comp2, pin2, ':');
+		if (_component.find(comp2) == _component.end())
+			throw NanoError("Component " + comp2 + " is not initialized");
+		if (_component.find(comp) == _component.end())
+			throw NanoError("Component " + comp + " is not initialized");
 		try {
 			if ((size_t)std::stoi(pin2) > _component[comp2]->getMaxPin())
 				throw NanoError("Pin is to high");
@@ -99,10 +102,6 @@ void	Parser::parsing_links(std::vector<std::string> links)
 		} catch (std::exception &ex) {
 			throw NanoError("Pin is invalid");
 		}
-		if (_component.find(comp2) == _component.end())
-			throw NanoError("Component " + comp2 + " is not initialized");
-		if (_component.find(comp) == _component.end())
-			throw NanoError("Component " + comp + " is not initialized");
 		try {
 			_component[comp2]->setLink((size_t) std::stoi(pin2), *_component[comp],(size_t) std::stoi(pin));
 		} catch (const NanoError exception) {

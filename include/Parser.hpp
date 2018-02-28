@@ -27,7 +27,6 @@ public:
 
 protected:
 	std::string _fname;
-	std::string _compname;
 	std::map<std::string, std::string> _input_args;
         compMap	_component;
 };

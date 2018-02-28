@@ -11,7 +11,7 @@
 #include "Error.hpp"
 
 Output::Output(const std::string &value)
-	: _maxPin(1), _component(nullptr), _value(nts::Tristate::UNDEFINED), _type("output")
+	: _maxPin(1), _component(NULL), _value(nts::Tristate::UNDEFINED), _type("output")
 {
 	(void)value;
 }
@@ -28,7 +28,7 @@ nts::Tristate	Output::compute(size_t pin)
 
 void	Output::setLink(size_t pin, nts::IComponent &comp, size_t otherPin)
 {
-	if (_component == nullptr) {
+	if (_component == NULL) {
 		_component = &comp;
 		_otherPin = otherPin;
 		comp.setLink(otherPin, *this, pin);
@@ -52,6 +52,8 @@ void	Output::dump() const
 
 void	Output::setValue(const size_t value)
 {
+	if (_component == NULL)
+		throw NanoError("An output is not linked");
 	(void) value;
 	_value = _component->compute(_otherPin);
 }

@@ -10,6 +10,8 @@
 #include "TekSpice.hpp"
 #include "Error.hpp"
 
+bool	sigint = false;
+
 TekSpice::TekSpice(int ac, char **av)
 	: _filename(av[1]), _parser(std::make_unique<Parser>(_filename, _component))
 {
@@ -38,10 +40,17 @@ TekSpice::TekSpice(int ac, char **av)
 	_loopFunc["exit"] = exit;
 	_loopFunc["loop"] = loop;
 	_loopFunc["dump"] = dump;
+	signal(SIGINT, receiveSigint);
 }
 
 TekSpice::~TekSpice()
 {
+}
+
+void	TekSpice::receiveSigint(int signal)
+{
+	(void) signal;
+	sigint = false;
 }
 
 int	TekSpice::changeValue(const std::string cmd)
@@ -89,7 +98,8 @@ int	TekSpice::exit(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
 
 int	TekSpice::loop(std::map<std::string, std::unique_ptr<nts::IComponent>> &map)
 {
-	while (42) {
+	sigint = true;
+	while (sigint == true) {
 		simulate(map);
 	}
 	return 0;
@@ -124,11 +134,11 @@ void	TekSpice::run()
 	_parser->set_MapArgs(_inputValue);
 	try {
 		_parser->parsing_manager();
+		simulate(_component);
+		display(_component);
 	} catch (const NanoError error) {
 		throw error;
 	}
-	simulate(_component);
-	display(_component);
 	std::cout << "> ";
 	while (std::cin >> cmd) {
 		if (!_loopFunc[cmd]) {

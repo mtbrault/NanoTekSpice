@@ -24,6 +24,7 @@ public:
 	using	compMap = std::map<std::string, std::unique_ptr<nts::IComponent>>;
 	void		run();
 	int		changeValue(const std::string);
+	static void	receiveSigint(int);
 	static int	display(compMap &);
 	static int	simulate(compMap &);
 	static int	exit(compMap &);

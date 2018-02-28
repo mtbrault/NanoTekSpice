@@ -22,7 +22,7 @@ public:
 	nts::Tristate	output(size_t);
 	nts::Tristate	input(size_t);
 	void		setLink(std::size_t, nts::IComponent &,
-					std::size_t);
+				std::size_t);
 	void		dump() const;
 	size_t		getMaxPin() const;
 	std::string	getType() const;

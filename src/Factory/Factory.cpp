@@ -18,8 +18,8 @@ Factory::Factory()
 	_map["4017"] = newComp<C4017>;
 	_map["4030"] = newComp<C4030>;
 	_map["4040"] = newComp<C4040>;
-	_map["4069"] = newComp<C4069>;
-	_map["4071"] = newComp<C4071>;*/
+	_map["4069"] = newComp<C4069>;*/
+	_map["4071"] = newComp<C4071>;
 	_map["4081"] = newComp<C4081>;
 	/*_map["4094"] = newComp<C4094>;
 	_map["4514"] = newComp<C4514>;*/

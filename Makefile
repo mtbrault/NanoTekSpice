@@ -15,6 +15,7 @@ SRC	=	main.cpp			\
 		src/parser/Parser.cpp		\
 		src/Factory/Factory.cpp		\
 		src/components/C4081.cpp	\
+		src/components/C4071.cpp	\
 		src/components/Output.cpp	\
 		src/components/Input.cpp	\
 		src/components/Clock.cpp	\
