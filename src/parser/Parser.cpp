@@ -137,6 +137,8 @@ void	Parser::parsing_manager()
 				links.push_back(line);
 		}
 	}
+	if (chipsets.size() == 0)
+		throw NanoError("Bad file");
 	parsing_chipsets(chipsets);
 	parsing_links(links);
 }
