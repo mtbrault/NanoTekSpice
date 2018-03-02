@@ -17,6 +17,7 @@ SRC	=	main.cpp			\
 		src/components/C4001.cpp	\
 		src/components/C4011.cpp	\
 		src/components/C4030.cpp	\
+		src/components/C4069.cpp	\
 		src/components/C4081.cpp	\
 		src/components/C4071.cpp	\
 		src/components/Output.cpp	\

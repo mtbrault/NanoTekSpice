@@ -47,9 +47,7 @@ size_t	Clock::getMaxPin() const
 void	Clock::setValue(const size_t value)
 {
 	(void) value;
-	std::cout << "value était " << _value << std::endl;
 	_value = (_value == nts::Tristate::TRUE) ? nts::Tristate::FALSE : nts::Tristate::TRUE;
-	std::cout << "maintenant " << _value << std::endl;
 }
 
 std::string	Clock::getType() const
