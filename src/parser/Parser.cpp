@@ -95,9 +95,9 @@ void	Parser::parsing_links(std::vector<std::string> links)
 		if (_component.find(comp) == _component.end())
 			throw NanoError("Component " + comp + " is not initialized");
 		try {
-			if ((size_t)std::stoi(pin2) > _component[comp2]->getMaxPin())
+			if ((size_t)std::stoi(pin2) > _component[comp2]->getMaxPin() || (size_t)std::stoi(pin2) <= 0)
 				throw NanoError("Pin is to high");
-			if ((size_t)std::stoi(pin) > _component[comp]->getMaxPin())
+			if ((size_t)std::stoi(pin) > _component[comp]->getMaxPin() || (size_t)std::stoi(pin) <= 0)
 				throw NanoError("Pin is to high");
 		} catch (std::exception &ex) {
 			throw NanoError("Pin is invalid");
